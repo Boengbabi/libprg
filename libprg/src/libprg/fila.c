@@ -1,107 +1,121 @@
+#include <stdlib.h>
+#include <stdio.h>
 #include <stdbool.h>
 #include "libprg/libprg.h"
-#include <stdio.h>
-#include <stdlib.h>
 
-typedef struct fila // define a estrutura fila
-{
-    int* elementos; // elementos da fila
-    int capacidade; // capacidada da fila
-    int tamanho; // tamanho da fila
-    int inicio; // elemento que está no início da fila
-    int fim; // elemento que está no fim da fila
-} fila_t;
+typedef struct no_fila {
+    int valor;
+    struct no_fila* proximo;
+} no_fila_t;
+
+struct fila {
+    no_fila_t* inicio;
+    no_fila_t* fim;
+    int tamanho;
+};
 
 fila_t* criar_fila(int capacidade)
 {
-    fila_t* f = malloc(sizeof(fila_t)); // aloca memória para criar a fila
+    fila_t* f = malloc(sizeof(struct fila));
+    if (f == NULL) {
+        exit(EXIT_FAILURE); // não conseguiu alocar memória
+    }
 
-    f->elementos = malloc(capacidade * sizeof(int)); // aloca memória para os elementos da fila
-    f->inicio = 0; // inicia o início da fila como 0 (ainda não tem elementos)
-    f->tamanho = 0; // inicia o tamanho da fila como zero (ainda não tem elementos)
-    f->fim = 0; // inicia o fim da fila como 0 (ainda não tem elementos)
-    f->capacidade = capacidade; // a capacidade é igual a que for recebida pela função
+    f->inicio = NULL;
+    f->fim = NULL;
+    f->tamanho = 0;
 
-    return f; // retorna a fila criada
+    return f;
 }
 
-void enfileirar(fila_t* f, int valor)
+void enfileirar(fila_t* fila, int valor)
 {
-    if (fila_cheia(f))
-    {
-        // se a fila estiver cheia
-        exit(EXIT_FAILURE); // retorna um erro
+    no_fila_t* novo = malloc(sizeof(no_fila_t));
+    if (novo == NULL) {
+        exit(EXIT_FAILURE);
     }
-    f->elementos[f->fim] = valor; // caso contrário, adiciona um elemento no fim da fila
-    f->fim++; // o fim passa uma casa para frente
-    f->tamanho++; // e o tamanho da fila aumenta
+
+    novo->valor = valor;
+    novo->proximo = NULL;
+
+    if (fila->inicio == NULL) {
+
+        fila->inicio = novo;
+        fila->fim = novo;
+    } else {
+
+        fila->fim->proximo = novo;
+        fila->fim = novo;
+    }
+
+    fila->tamanho++;
 }
 
 void desenfileirar(fila_t* f)
 {
-    if (fila_vazia(f))
-    {
-        // se a fila estiver vazia
-        exit(EXIT_FAILURE); // retorna um erro
+    if (f->inicio == NULL) {
+        exit(EXIT_FAILURE); // fila vazia, não tem o que remover
     }
-    f->inicio++; // passa o início uma casa para frente
-    f->tamanho--; // o tamanho diminui
+
+    no_fila_t* removido = f->inicio;
+    f->inicio = f->inicio->proximo;
+
+    if (f->inicio == NULL) {
+        f->fim = NULL; // a fila ficou vazia
+    }
+
+    free(removido);
+    f->tamanho--;
 }
 
 int inicio_fila(fila_t* f)
 {
-    if (!fila_vazia(f))
-    {
-        // se a fila não estiver vazia
-        return f->elementos[f->inicio]; // retorna o elemento que está no início
+    if (f->inicio == NULL) {
+        return -1;
     }
-    return -1; // se estiver vazia, retorna que não tem elementos
+    return f->inicio->valor;
 }
 
 int fim_fila(fila_t* f)
 {
-    if (!fila_vazia(f))
-    {
-        // se a fila não estiver vazia
-        return f->elementos[f->fim - 1]; // retorna o elemento que está no fim dela
+    if (f->fim == NULL) {
+        return -1;
     }
-    return -1; // caso contrário, retorna que está vazia
+    return f->fim->valor;
 }
 
 int tamanho_fila(fila_t* f)
 {
-    // if (fila_vazia(f)) {
-    //     return 0;
-    // } else if (fila_cheia(f)) {
-    //     return f->capacidade;
-    // } else if ((f->fim > f->inicio) || (f->fim == f->inicio)) {
-    //     return f->fim;
-    // }
-    // return f->inicio;
-
-    return f->tamanho; // retorna o tamanho da fila
+    return f->tamanho;
 }
 
 bool fila_cheia(fila_t* f)
 {
-    return f->tamanho == f->capacidade; // se o tamanho for igual a capacidade significa que a fila está cheia
+    (void)f;
+    return false; // lista encadeada não tem limite fixo
 }
 
 bool fila_vazia(fila_t* f)
 {
-    return f->tamanho == 0; // se o tamanho for zero, retorna que a fila está vazia
+    return f->tamanho == 0;
 }
 
 void listar_fila(fila_t* f)
 {
-    for (int i = 0; i < f->fim; i++) // enquanto i for menor que o fim da fila
-    {
-        printf("\t%d", f->elementos[i]); // imprime na tela os elementos da fila
+    no_fila_t* atual = f->inicio;
+    while (atual != NULL) {
+        printf("\t%d", atual->valor);
+        atual = atual->proximo;
     }
 }
 
 void destruir_fila(fila_t* f)
 {
-    free(f->elementos); // libera a memória alocada para os elementos da fila
-    free(f); // libera a memória alocada para a fila
+    no_fila_t* atual = f->inicio;
+    while (atual != NULL) {
+        no_fila_t* proximo = atual->proximo;
+        free(atual);
+        atual = proximo;
+    }
+    free(f);
 }
