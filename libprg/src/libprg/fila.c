@@ -18,7 +18,7 @@ fila_t* criar_fila(int capacidade)
 {
     fila_t* f = malloc(sizeof(struct fila));
     if (f == NULL) {
-        exit(EXIT_FAILURE); // não conseguiu alocar memória
+        exit(EXIT_FAILURE);
     }
 
     f->inicio = NULL;
@@ -54,14 +54,14 @@ void enfileirar(fila_t* fila, int valor)
 void desenfileirar(fila_t* f)
 {
     if (f->inicio == NULL) {
-        exit(EXIT_FAILURE); // fila vazia, não tem o que remover
+        exit(EXIT_FAILURE);
     }
 
     no_fila_t* removido = f->inicio;
     f->inicio = f->inicio->proximo;
 
     if (f->inicio == NULL) {
-        f->fim = NULL; // a fila ficou vazia
+        f->fim = NULL;
     }
 
     free(removido);
@@ -92,7 +92,7 @@ int tamanho_fila(fila_t* f)
 bool fila_cheia(fila_t* f)
 {
     (void)f;
-    return false; // lista encadeada não tem limite fixo
+    return false;
 }
 
 bool fila_vazia(fila_t* f)
