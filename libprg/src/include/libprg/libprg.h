@@ -36,5 +36,6 @@ int lista_primeiro(ListaLinear *lista);
 int lista_tamanho(ListaLinear *lista);
 void lista_remover_inicio(ListaLinear *lista);
 void lista_imprimir(ListaLinear *lista);
+void lista_destruir(ListaLinear *lista);
 
 #endif //LABORATORIO_LIBPRG_H

@@ -57,3 +57,13 @@ void lista_imprimir(ListaLinear *lista) {
     }
     printf("\n");
 }
+
+void lista_destruir(ListaLinear *lista) {
+    No *atual = lista->inicio;
+    while (atual != NULL) {
+        No *proximo = atual->proximo;
+        free(atual);
+        atual = proximo;
+    }
+    free(lista);
+}
