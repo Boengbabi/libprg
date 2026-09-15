@@ -36,3 +36,15 @@ int lista_primeiro(ListaLinear *lista) {
 int lista_tamanho(ListaLinear *lista) {
     return lista->tamanho;
 }
+
+void lista_remover_inicio(ListaLinear *lista) {
+    if (lista->inicio == NULL) return;
+
+    No *temp = lista->inicio;
+    lista->inicio = lista->inicio->proximo;
+    if (lista->inicio == NULL) {
+        lista->fim = NULL;
+    }
+    free(temp);
+    lista->tamanho--;
+}

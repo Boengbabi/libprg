@@ -34,5 +34,6 @@ ListaLinear* lista_criar(void);
 void lista_inserir(ListaLinear *lista, int valor);
 int lista_primeiro(ListaLinear *lista);
 int lista_tamanho(ListaLinear *lista);
+void lista_remover_inicio(ListaLinear *lista);
 
 #endif //LABORATORIO_LIBPRG_H
