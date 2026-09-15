@@ -14,3 +14,17 @@ ListaLinear* lista_criar(void) {
     return lista;
 }
 
+void lista_inserir(ListaLinear *lista, int valor) {
+    No *novo = malloc(sizeof(No));
+    novo->valor = valor;
+    novo->proximo = NULL;
+
+    if (lista->fim == NULL) {
+        lista->inicio = novo;
+        lista->fim = novo;
+    } else {
+        lista->fim->proximo = novo;
+        lista->fim = novo;
+    }
+    lista->tamanho++;
+}

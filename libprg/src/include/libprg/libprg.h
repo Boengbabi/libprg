@@ -31,6 +31,7 @@ typedef struct lista_linear {
 } ListaLinear;
 
 ListaLinear* lista_criar(void);
+void lista_inserir(ListaLinear *lista, int valor);
 
 
 #endif //LABORATORIO_LIBPRG_H
