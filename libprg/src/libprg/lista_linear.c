@@ -28,3 +28,7 @@ void lista_inserir(ListaLinear *lista, int valor) {
     }
     lista->tamanho++;
 }
+
+int lista_primeiro(ListaLinear *lista) {
+    return lista->inicio->valor;
+}
