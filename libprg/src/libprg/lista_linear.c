@@ -48,3 +48,12 @@ void lista_remover_inicio(ListaLinear *lista) {
     free(temp);
     lista->tamanho--;
 }
+
+void lista_imprimir(ListaLinear *lista) {
+    No *atual = lista->inicio;
+    while (atual != NULL) {
+        printf("%d ", atual->valor);
+        atual = atual->proximo;
+    }
+    printf("\n");
+}
