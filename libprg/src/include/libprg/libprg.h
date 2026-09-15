@@ -17,5 +17,20 @@ bool fila_vazia(fila_t* f);
 void listar_fila(fila_t *f);
 void destruir_fila(fila_t* f);
 
+// |-- LISTA -- |
+
+typedef struct no {
+    int valor;
+    struct no *proximo;
+} No;
+
+typedef struct lista_linear {
+    No *inicio;
+    No *fim;
+    int tamanho;
+} ListaLinear;
+
+ListaLinear* lista_criar(void);
+
 
 #endif //LABORATORIO_LIBPRG_H
