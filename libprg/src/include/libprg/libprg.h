@@ -17,7 +17,7 @@ bool fila_vazia(fila_t* f);
 void listar_fila(fila_t *f);
 void destruir_fila(fila_t* f);
 
-// |-- LISTA -- |
+// |-- LISTA --|
 
 typedef struct no {
     int valor;
@@ -37,5 +37,25 @@ int lista_tamanho(ListaLinear *lista);
 void lista_remover_inicio(ListaLinear *lista);
 void lista_imprimir(ListaLinear *lista);
 void lista_destruir(ListaLinear *lista);
+
+// |-- Lista Encadeada --|
+
+typedef struct No {
+    int valor;
+    struct No *proximo;
+} No;
+
+typedef struct {
+    No *inicio;
+    int tamanho;
+} ListaEncadeada;
+
+ListaEncadeada *lista_criar(void);
+int  lista_inserir(ListaEncadeada *l, int valor);
+int  lista_remover(ListaEncadeada *l, int *valor);
+int  lista_primeiro(const ListaEncadeada *l, int *valor);
+int  lista_tamanho(const ListaEncadeada *l);
+void lista_imprimir(const ListaEncadeada *l);
+void lista_destruir(ListaEncadeada *l);
 
 #endif //LABORATORIO_LIBPRG_H
