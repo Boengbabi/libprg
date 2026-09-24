@@ -6,7 +6,7 @@
 #include <stdlib.h>
 #include "libprg/libprg.h"
 
-ListaEncadeada *lista_criar(void) {
+ListaEncadeada *lenc_criar(void) {
     ListaEncadeada *l = malloc(sizeof(ListaEncadeada));
     if (l == NULL) return NULL;
     l->inicio = NULL;
@@ -14,9 +14,9 @@ ListaEncadeada *lista_criar(void) {
     return l;
 }
 
-int lista_inserir(ListaEncadeada *l, int valor) {
+int lenc_inserir(ListaEncadeada *l, int valor) {
     if (l == NULL) return -1;
-    No *novo = malloc(sizeof(No));
+    NoLE *novo = malloc(sizeof(NoLE));
     if (novo == NULL) return -1;
     novo->valor = valor;
     novo->proximo = NULL;
@@ -24,7 +24,7 @@ int lista_inserir(ListaEncadeada *l, int valor) {
     if (l->inicio == NULL) {
         l->inicio = novo;
     } else {
-        No *atual = l->inicio;
+        NoLE *atual = l->inicio;
         while (atual->proximo != NULL) atual = atual->proximo;
         atual->proximo = novo;
     }
@@ -32,9 +32,9 @@ int lista_inserir(ListaEncadeada *l, int valor) {
     return 0;
 }
 
-int lista_remover(ListaEncadeada *l, int *valor) {
+int lenc_remover(ListaEncadeada *l, int *valor) {
     if (l == NULL || l->inicio == NULL) return -1;
-    No *remover = l->inicio;
+    NoLE *remover = l->inicio;
     if (valor != NULL) *valor = remover->valor;
     l->inicio = remover->proximo;
     free(remover);
@@ -42,28 +42,28 @@ int lista_remover(ListaEncadeada *l, int *valor) {
     return 0;
 }
 
-int lista_primeiro(const ListaEncadeada *l, int *valor) {
+int lenc_primeiro(const ListaEncadeada *l, int *valor) {
     if (l == NULL || l->inicio == NULL) return -1;
     *valor = l->inicio->valor;
     return 0;
 }
 
-int lista_tamanho(const ListaEncadeada *l) {
+int lenc_tamanho(const ListaEncadeada *l) {
     return l == NULL ? 0 : l->tamanho;
 }
 
-void lista_imprimir(const ListaEncadeada *l) {
+void lenc_imprimir(const ListaEncadeada *l) {
     if (l == NULL) return;
-    for (No *n = l->inicio; n != NULL; n = n->proximo)
+    for (NoLE *n = l->inicio; n != NULL; n = n->proximo)
         printf("%d ", n->valor);
     printf("\n");
 }
 
-void lista_destruir(ListaEncadeada *l) {
+void lenc_destruir(ListaEncadeada *l) {
     if (l == NULL) return;
-    No *atual = l->inicio;
+    NoLE *atual = l->inicio;
     while (atual != NULL) {
-        No *prox = atual->proximo;
+        NoLE *prox = atual->proximo;
         free(atual);
         atual = prox;
     }

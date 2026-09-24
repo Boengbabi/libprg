@@ -40,22 +40,22 @@ void lista_destruir(ListaLinear *lista);
 
 // |-- Lista Encadeada --|
 
-typedef struct No {
+typedef struct NoLE {
     int valor;
-    struct No *proximo;
-} No;
+    struct NoLE *proximo;
+} NoLE;
 
 typedef struct {
-    No *inicio;
+    NoLE *inicio;
     int tamanho;
 } ListaEncadeada;
 
-ListaEncadeada *lista_criar(void);
-int  lista_inserir(ListaEncadeada *l, int valor);
-int  lista_remover(ListaEncadeada *l, int *valor);
-int  lista_primeiro(const ListaEncadeada *l, int *valor);
-int  lista_tamanho(const ListaEncadeada *l);
-void lista_imprimir(const ListaEncadeada *l);
-void lista_destruir(ListaEncadeada *l);
+ListaEncadeada *lenc_criar(void);
+int  lenc_inserir(ListaEncadeada *l, int valor);
+int  lenc_remover(ListaEncadeada *l, int *valor);
+int  lenc_primeiro(const ListaEncadeada *l, int *valor);
+int  lenc_tamanho(const ListaEncadeada *l);
+void lenc_imprimir(const ListaEncadeada *l);
+void lenc_destruir(ListaEncadeada *l);
 
 #endif //LABORATORIO_LIBPRG_H
