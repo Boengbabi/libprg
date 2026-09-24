@@ -42,9 +42,13 @@ int lista_remover(ListaEncadeada *l, int *valor) {
     return 0;
 }
 
-
 int lista_primeiro(const ListaEncadeada *l, int *valor) {
     if (l == NULL || l->inicio == NULL) return -1;
     *valor = l->inicio->valor;
     return 0;
 }
+
+int lista_tamanho(const ListaEncadeada *l) {
+    return l == NULL ? 0 : l->tamanho;
+}
+
