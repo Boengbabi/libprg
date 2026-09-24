@@ -32,3 +32,12 @@ int lista_inserir(ListaEncadeada *l, int valor) {
     return 0;
 }
 
+int lista_remover(ListaEncadeada *l, int *valor) {
+    if (l == NULL || l->inicio == NULL) return -1;
+    No *remover = l->inicio;
+    if (valor != NULL) *valor = remover->valor;
+    l->inicio = remover->proximo;
+    free(remover);
+    l->tamanho--;
+    return 0;
+}
