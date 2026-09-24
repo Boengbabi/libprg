@@ -59,3 +59,13 @@ void lista_imprimir(const ListaEncadeada *l) {
     printf("\n");
 }
 
+void lista_destruir(ListaEncadeada *l) {
+    if (l == NULL) return;
+    No *atual = l->inicio;
+    while (atual != NULL) {
+        No *prox = atual->proximo;
+        free(atual);
+        atual = prox;
+    }
+    free(l);
+}
