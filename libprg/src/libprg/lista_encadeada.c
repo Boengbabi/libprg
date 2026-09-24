@@ -14,3 +14,21 @@ ListaEncadeada *lista_criar(void) {
     return l;
 }
 
+int lista_inserir(ListaEncadeada *l, int valor) {
+    if (l == NULL) return -1;
+    No *novo = malloc(sizeof(No));
+    if (novo == NULL) return -1;
+    novo->valor = valor;
+    novo->proximo = NULL;
+
+    if (l->inicio == NULL) {
+        l->inicio = novo;
+    } else {
+        No *atual = l->inicio;
+        while (atual->proximo != NULL) atual = atual->proximo;
+        atual->proximo = novo;
+    }
+    l->tamanho++;
+    return 0;
+}
+
