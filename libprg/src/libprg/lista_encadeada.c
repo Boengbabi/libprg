@@ -52,3 +52,10 @@ int lista_tamanho(const ListaEncadeada *l) {
     return l == NULL ? 0 : l->tamanho;
 }
 
+void lista_imprimir(const ListaEncadeada *l) {
+    if (l == NULL) return;
+    for (No *n = l->inicio; n != NULL; n = n->proximo)
+        printf("%d ", n->valor);
+    printf("\n");
+}
+
