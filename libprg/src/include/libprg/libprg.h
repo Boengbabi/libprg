@@ -58,4 +58,10 @@ int  lenc_tamanho(const ListaEncadeada *l);
 void lenc_imprimir(const ListaEncadeada *l);
 void lenc_destruir(ListaEncadeada *l);
 
+// |--Onderna --| //
+
+void bubble_sort(int *v, int n);
+void insertion_sort(int *v, int n);
+void selection_sort(int *v, int n);
+
 #endif //LABORATORIO_LIBPRG_H
