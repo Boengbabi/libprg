@@ -2,7 +2,7 @@
 // Created by Babi on 05/10/2026.
 //
 
-#include "libprg.h"
+#include <libprg/libprg.h>
 
 void bubble_sort(int *v, int n) {
     for (int i = 0; i < n - 1; i++) {
